@@ -93,6 +93,7 @@ impl BPFBuilder {
     /// Set CFLAGS to be used
     pub fn cflags<T: AsRef<str>>(mut self, cflags: &[T]) -> Result<Self, BccError> {
         self.cflags.clear();
+        self.cflags.shrink_to_fit();
         for f in cflags {
             let cs = CString::new(f.as_ref())?;
             self.cflags.push(cs);
